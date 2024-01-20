@@ -6,13 +6,14 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --base=/vanilla-app-template/",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "push": "git add .; git commit -m 'update'; git push"
   },
   "devDependencies": {
     "vite": "^4.0.5",
     "glob": "^8.1.0"
   },
-  "author": "Alexander Repeta <alexander.repeta@gmail.com>",
+  "author": "Kateryna Massa <catherineorlova27@gmail.com>",
   "license": "ISC",
   "dependencies": {
     "vite-plugin-full-reload": "^1.0.5",

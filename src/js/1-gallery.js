@@ -1,3 +1,5 @@
+const { default: simpleLightbox } = require('simplelightbox');
+
 const images = [
   {
     preview:
@@ -75,7 +77,6 @@ const galleryItems = images
         <img
           class="gallery-image"
           src="${image.preview}"
-          data-source="${image.original}"
           alt="${image.description}"
         />
       </a>
@@ -86,42 +87,9 @@ const galleryItems = images
 
 galleryList.innerHTML = galleryItems;
 
-// Listening for clicks on ul.gallery and disallowing the default action
-galleryList.addEventListener('click', event => {
-  event.preventDefault();
-
-  const target = event.target;
-
-  // Get a link to the large image
-  const imageLink = target.dataset.source;
-
-  // Checking if the image was actually clicked
-  if (target.classList.contains('gallery-image')) {
-    // Define closeLightbox outside the event listener
-    let closeModal;
-
-    // Opening a modal window with a large image
-    const modal = basicLightbox.create(
-      `
-        <img src="${imageLink}" width="1112" height="640">
-      `,
-      {
-        onShow: () => {
-          document.addEventListener('keydown', closeModal);
-        },
-
-        onClose: () => {
-          document.removeEventListener('keydown', closeModal);
-        },
-      }
-    );
-
-    closeModal = event => {
-      if (event.key === 'Escape') {
-        modal.close();
-      }
-    };
-
-    modal.show();
-  }
+document.addEventListener('DOMContentLoaded', function () {
+  const gallery = new SimpleLightbox('.gallery a', {
+    captionsData: 'alt',
+    captionDelay: 250,
+  });
 });

@@ -4,9 +4,17 @@ document.addEventListener('DOMContentLoaded', function () {
   // Check local storage for saved data
   const savedState = localStorage.getItem('feedback-form-state');
   if (savedState) {
-    const { email, message } = JSON.parse(savedState);
-    form.elements.email.value = email;
-    form.elements.message.value = message;
+    try {
+      const { email, message } = JSON.parse(savedState);
+
+      // Check if email and message are defined before setting values
+      if (email !== undefined && message !== undefined) {
+        form.elements.email.value = email;
+        form.elements.message.value = message;
+      }
+    } catch (error) {
+      console.error('Error parsing saved state:', error);
+    }
   }
 
   // Save data to local storage on input
@@ -14,7 +22,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const { name, value } = event.target;
     const currentState =
       JSON.parse(localStorage.getItem('feedback-form-state')) || {};
-    currentState[name] = value.trim(); // Remove leading and trailing spaces
+    // Remove leading and trailing spaces
+    currentState[name] = value.trim();
     localStorage.setItem('feedback-form-state', JSON.stringify(currentState));
   });
 

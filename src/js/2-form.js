@@ -8,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function () {
       const { email, message } = JSON.parse(savedState);
 
       // Check if email and message are defined before setting values
-      if (email !== undefined && message !== undefined) {
-        form.elements.email.value = email;
-        form.elements.message.value = message;
+      if (savedState.email !== undefined && savedState.message !== undefined) {
+        form.elements.email.value = savedState.email;
+        form.elements.message.value = savedState.message;
       }
     } catch (error) {
       console.error('Error parsing saved state:', error);
